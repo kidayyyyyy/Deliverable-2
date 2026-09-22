@@ -3,7 +3,7 @@
     require 'db.php';
 
     // Get email and check if user added email
-    $email = isset($_GET['email']) ? trim($_GET['email']) : '';
+    $email = isset($_GET['customer_email']) ? trim($_GET['customer_email']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,11 +20,12 @@
     <div class="main">
         <h2>Rental History</h2>
         <?php
+            // Check if email is not empty
             if (empty($email)) {
                 echo "<p class='message'>Please provide a valid customer email.</p>";
             } else {
-                $email_clean = mysqli_real_escape_string($conn, $email);
-                $sql = "SELECT rental_id, start_time, hire_from FROM rental WHERE customer_email = '$email_clean'";
+                $clean_email = mysqli_real_escape_string($conn, $email);
+                $sql = "SELECT rental_id, start_time, hire_from FROM rental WHERE customer_email = '$clean_email'";
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
                     if (mysqli_num_rows($result) > 0) {
@@ -39,12 +40,12 @@
                         }
                         echo "</table>";
                 } else {
-                    echo "fuck you";
+                    echo "</p>There is no rental history for $email</>";
                 }
                 } else {
                     echo "bitch";
                 }
-                
+
             }
             mysqli_close($conn);
         ?>

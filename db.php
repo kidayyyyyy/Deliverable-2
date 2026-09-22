@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db   = 'EquipEase_DEV'; 
-$user = 'root';    
-$pass = '';      
+$db   = 'EquipEase_DEV';
+$user = 'root';
+$pass = '';
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);
