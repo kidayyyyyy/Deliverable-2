@@ -10,19 +10,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Customer Rentals | EquipEase Rentals</title>
 </head>
 <body>
-    <nav>
-        <h1><a href="index.php">EquipEase Rentals</a></h1>
+     <nav>
+        <h1><a href="index.php">EquipEase Rentals Dashboard</a></h1>
     </nav>
 
     <div class="main">
         <h2>Rental History</h2>
         <?php
+            echo "<p>Results for $email</p>";
             // Check if email is not empty
             if (empty($email)) {
-                echo "<p class='message'>Please provide a valid customer email.</p>";
+                echo "<p>Please provide a valid customer email.</p>";
             } else {
                 $clean_email = mysqli_real_escape_string($conn, $email);
                 $sql = "SELECT rental_id, start_time, hire_from FROM rental WHERE customer_email = '$clean_email'";
@@ -41,11 +43,8 @@
                         echo "</table>";
                 } else {
                     echo "</p>There is no rental history for $email</>";
+                    }
                 }
-                } else {
-                    echo "bitch";
-                }
-
             }
             mysqli_close($conn);
         ?>

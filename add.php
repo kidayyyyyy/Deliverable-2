@@ -8,6 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 	<title>Add Equipment | EquipEase Rentals</title>
 </head>
 <body>
@@ -16,8 +17,6 @@
     </nav>
 
     <?php
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $equipment_id = htmlspecialchars($_POST['equipment_id']);
             $equipment_availability = htmlspecialchars($_POST['equipment_availability']);
@@ -30,21 +29,29 @@
             if ($stmt) {
                 $stmt->bind_param("iisss", $equipment_id, $equipment_availability, $equipment_purchase_date, $equipment_branch_name, $equipment_type);
 
-                if ($stmt->execute()) {
-                    echo "<div class='message'>";
-                    echo "<h3>Successfully Added New Equipment!</h3>";
+                try {
+                    $stmt->execute();
+                    echo "<div class='info-sm' style='margin-top: 2rem'>";
                     echo "<p><strong>ID:</strong> " . htmlspecialchars($equipment_id) . "</p>";
                     echo "<p><strong>Available:</strong> " . ($equipment_availability ? 'Yes' : 'No') . "</p>";
                     echo "<p><strong>Purchase Date:</strong> " . htmlspecialchars($equipment_purchase_date) . "</p>";
                     echo "<p><strong>Branch:</strong> " . htmlspecialchars($equipment_branch_name) . "</p>";
                     echo "<p><strong>Type:</strong> " . htmlspecialchars($equipment_type) . "</p>";
+                    echo "<h3>Successfully Added New Equipment!</h3>";
                     echo "</div>";
-                } else {
-                    echo "<p class='message'>Error adding equipment: It is possible the Branch Name or Type Name does not exist in the database, or the ID is already taken.</p>";
+
+                } catch (mysqli_sql_exception $e) {
+                    // Grab the specific SQL error from the statement object
+                    $sql_error = htmlspecialchars($e->getMessage());
+                    echo "<div class='info-sm' style='margin-top: 2rem'>";
+                    echo "<h3 style='margin-bottom: 1rem;'>Error Adding Equipment</h3>";
+                    echo "<p>The database returned the following error:</p>";
+                    echo "<p><strong>" . $sql_error . "</strong></p>";
+                    echo "</div>";
                 }
                 $stmt->close();
             } else {
-                echo "<p class='message'>Database query failed. Please check your inputs.</p>";
+                echo "<p class='info-sm'>Database query failed.</p>";
             }
 
         }

@@ -8,14 +8,14 @@
 body {
   font-family: Arial, sans-serif;
   margin: auto;
-  background-color: #1e1e1e;
-  color: #030303;
+  background-color: #f4f7f6;
+  color: #333333;
   width: 90%;
   box-sizing: border-box;
 }
 
 .info-sm {
-  background-color: rebeccapurple;
+  background-color: #0a9396;
   color: white;
   padding: 1.2rem;
   margin-bottom: 2em;
@@ -23,7 +23,7 @@ body {
 
 /* Navigation Bar */
 nav {
-  background-color: #1e5fba;
+  background-color: #005f73;
   padding: 15px;
   text-align: center;
   width: 100%;
@@ -44,6 +44,11 @@ h1 a {
 h1,
 h2 {
   margin-bottom: 0.2rem;
+  color: #005f73;
+}
+
+p {
+  margin-bottom: 0.5rem;
 }
 
 /* Main Content */
@@ -55,15 +60,34 @@ h2 {
 }
 
 /* Form */
+.form-flex {
+  display: flex;
+  gap: 1.3rem;
+  box-shadow: 0px 11px 20px 1px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
 form {
   display: flex;
-  max-width: 70%;
   flex-direction: column;
+  width: 100%;
+  max-width: 70%;
   padding: 2rem;
-  background-color: rgb(107, 51, 51);
-  gap: 0.3rem;
-  margin: auto;
-  margin-bottom: 2rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  gap: 0.8rem;
+  margin: 0 auto 2rem auto;
+}
+
+.form-flex form {
+  max-width: 100%;
+  margin: 0;
+  border: none;
+  padding: 1.5rem;
 }
 
 .form-group {
@@ -73,30 +97,32 @@ form {
 
 label {
   margin-bottom: 0.4rem;
+  font-weight: bold;
 }
 
 input:not([type="checkbox"]):not([type="radio"]),
 textarea,
 select {
   width: 100%;
-  padding: 0.2rem 0.9rem;
-  font-size: 1.2rem;
-  border: 0.1rem solid black;
+  padding: 0.2rem 0.2rem;
+  font-size: 1rem;
+  border: 0.1rem solid #ced4da;
+  background-color: #ffffff;
+  border-radius: 4px;
 }
 
 /* Table */
-
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 table,
 th,
 td {
-  border: 1px solid #000000;
-  color: black;
+  border: 1px solid #dee2e6;
+  color: #333333;
 }
 
 th {
@@ -104,6 +130,7 @@ th {
   border: none;
   padding: 10px;
   border-radius: 0px;
+  color: #333333;
 }
 
 button {
@@ -117,12 +144,4 @@ button {
 
 button:hover {
   background-color: #005f73;
-}
-
-/* Error/Success Messages */
-.message {
-  padding: 10px;
-  background-color: #e9ecef;
-  border-left: 5px solid #005f73;
-  margin-bottom: 20px;
 }
